@@ -31,16 +31,20 @@ class _PriceCounterState extends State<PriceCounter> {
   }
 
 void increment(){
-  setState(() {
-    _amount = widget.valueMin++;
-   _total = widget.priceUnit * widget.valueMin;
-  });
+  if(_amount > 0 && _amount <= widget.valueMax) {
+    setState(() {
+      _amount++;
+      _total = widget.priceUnit * _amount;
+    });
+  }
 }
 void decrement(){
-  setState(() {
-    _amount = widget.valueMin--;
-    _total = (widget.priceUnit * widget.valueMin) - widget.priceUnit;
-  });
+  if(_amount > 0 && _amount >= widget.valueMin) {
+    setState(() {
+      _amount--;
+      _total = (widget.priceUnit * _amount) - widget.priceUnit;
+    });
+  }
 }
   @override
   Widget build(BuildContext context) {
@@ -88,7 +92,7 @@ void decrement(){
     color: widget.color,
     width: 2)
     ),
-      child: Center(child: Text('${_total}',style: TextStyle(color: widget.color, fontSize: 25, fontWeight: FontWeight.bold),)),
+      child: Center(child: Text('$_total',style: TextStyle(color: widget.color, fontSize: 25, fontWeight: FontWeight.bold),)),
     );
   }
 }

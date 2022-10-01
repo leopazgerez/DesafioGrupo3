@@ -21,7 +21,7 @@ class PriceCounter extends StatefulWidget {
 class _PriceCounterState extends State<PriceCounter> {
   @override
   Widget build(BuildContext context) {
-    final int counter = widget.priceUnit;
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -36,6 +36,19 @@ class _PriceCounterState extends State<PriceCounter> {
   _description(){
     return Text('${widget.description}',style: TextStyle(color: widget.color, fontSize: 20));
   }
+
+  late int counterVar = widget.priceUnit;
+  void _incrementCounter() {
+    setState(() {
+      counterVar += widget.priceUnit;
+    });
+  }
+  void _decrementCounter() {
+    setState(() {
+      counterVar -= widget.priceUnit;
+    });
+  }
+
   _counter(){
     return Container(
         height: 50,
@@ -49,9 +62,9 @@ class _PriceCounterState extends State<PriceCounter> {
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        IconButton(onPressed: null, icon: Icon(Icons.remove,color: widget.color,)),
+        IconButton(onPressed: _decrementCounter, icon: Icon(Icons.remove,color: widget.color,)),
         Text('${widget.valueMin}',style: TextStyle(color: widget.color, fontSize: 25, fontWeight: FontWeight.bold),),
-        IconButton(onPressed: null, icon: Icon(Icons.add, color: widget.color,)),
+        IconButton(onPressed: _incrementCounter, icon: Icon(Icons.add, color: widget.color,)),
       ],
     ),
     );

@@ -18,10 +18,33 @@ class PriceCounter extends StatefulWidget {
   State<PriceCounter> createState() => _PriceCounterState();
 }
 
-class _PriceCounterState extends State<PriceCounter> {
+  class _PriceCounterState extends State<PriceCounter> {
+  late int _amount;
+  late int _total;
+
+  @override
+  void initState() {
+  // TODO: implement initState
+  super.initState();
+  _amount = widget.valueMin;
+  _total = widget.priceUnit * widget.valueMin;
+  }
+
+  void increment(){
+  setState(() {
+  _amount = widget.valueMin++;
+  _total = widget.priceUnit * widget.valueMin;
+  });
+  }
+  void decrement(){
+  setState(() {
+  _amount = widget.valueMin--;
+  _total = (widget.priceUnit * widget.valueMin) - widget.priceUnit;
+  });
+  }
+
   @override
   Widget build(BuildContext context) {
-
     return Padding(
       padding: const EdgeInsets.all(5),
       child: Row(
@@ -40,21 +63,6 @@ class _PriceCounterState extends State<PriceCounter> {
     return Text('${widget.description}',style: TextStyle(color: widget.color, fontSize: 20));
   }
 
-  late int numberBingos = widget.valueMin;
-  late int total = widget.priceUnit;
-  void _incrementCounter() {
-    setState(() {
-      total += widget.priceUnit;
-      numberBingos++;
-    });
-  }
-  void _decrementCounter() {
-    setState(() {
-      total -= widget.priceUnit;
-      numberBingos--;
-    });
-  }
-
   _counter(){
     return Container(
         height: 50,
@@ -68,9 +76,9 @@ class _PriceCounterState extends State<PriceCounter> {
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        IconButton(onPressed: _decrementCounter, icon: Icon(Icons.remove,color: widget.color,)),
-        Text('$numberBingos',style: TextStyle(color: widget.color, fontSize: 20, fontWeight: FontWeight.bold),),
-        IconButton(onPressed: _incrementCounter, icon: Icon(Icons.add, color: widget.color,)),
+        IconButton(onPressed: decrement, icon: Icon(Icons.remove,color: widget.color,)),
+        Text('$_amount',style: TextStyle(color: widget.color, fontSize: 20, fontWeight: FontWeight.bold),),
+        IconButton(onPressed: increment, icon: Icon(Icons.add, color: widget.color,)),
       ],
     ),
     );
@@ -88,7 +96,7 @@ class _PriceCounterState extends State<PriceCounter> {
       child: Row(
         children: [
           Icon(Icons.add, color: widget.color,),
-          Center(child: Text('$total',style: TextStyle(color: widget.color, fontSize: 20, fontWeight: FontWeight.bold),)),
+          Center(child: Text('$_total',style: TextStyle(color: widget.color, fontSize: 20, fontWeight: FontWeight.bold),)),
         ],
       ),
     );

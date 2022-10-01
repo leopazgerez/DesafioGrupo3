@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class PriceCounter extends StatefulWidget {
-  String? description;
-  int valueMax;
+  final String? description;
+  final int valueMax;
   late int valueMin;
-  int priceUnit;
+  final int priceUnit;
   late Color color;
   PriceCounter({
     required this.valueMax,
@@ -27,19 +27,24 @@ class PriceCounter extends StatefulWidget {
   // TODO: implement initState
   super.initState();
   _amount = widget.valueMin;
-  _total = widget.priceUnit * widget.valueMin;
+  _total = widget.priceUnit;
   }
 
   void increment(){
   setState(() {
-  _amount = widget.valueMin++;
-  _total = widget.priceUnit * widget.valueMin;
+    while (_amount <= widget.valueMax){
+      _total = widget.priceUnit * widget.valueMin;
+    }
+    _amount = widget.valueMin++;
   });
   }
   void decrement(){
   setState(() {
-  _amount = widget.valueMin--;
-  _total = (widget.priceUnit * widget.valueMin) - widget.priceUnit;
+    while (_amount >= widget.valueMin){
+      _total = widget.priceUnit * widget.valueMin;
+    }
+    _amount = widget.valueMin--;
+
   });
   }
 
@@ -62,11 +67,9 @@ class PriceCounter extends StatefulWidget {
   _description(){
     return Text('${widget.description}',style: TextStyle(color: widget.color, fontSize: 20));
   }
-
   _counter(){
     return Container(
         height: 50,
-        // width: 300,
         decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20.0),
     border: Border.all(
@@ -85,17 +88,17 @@ class PriceCounter extends StatefulWidget {
   }
   _totalPrice(){
     return Container(
-        height: 50,
-        // width: 50,
-        decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20.0),
-    border: Border.all(
-    color: widget.color,
-    width: 2)
-    ),
+      padding: const EdgeInsets.only(right: 5),
+      height: 50,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20.0),
+          border: Border.all(
+              color: widget.color,
+              width: 2)
+      ),
       child: Row(
         children: [
-          Icon(Icons.add, color: widget.color,),
+          Icon(Icons.attach_money, color: widget.color,),
           Center(child: Text('$_total',style: TextStyle(color: widget.color, fontSize: 20, fontWeight: FontWeight.bold),)),
         ],
       ),

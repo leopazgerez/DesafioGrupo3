@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
-        body:  Center(child: PriceCounter(valueMax: 10, priceUnit: 10000, description: 'Cantidad de cartones',))
+        body:  Center(child: PriceCounter(valueMax: 10, priceUnit: 2, description: 'Cantidad de cartones',valueMin: 5,))
       ),
     );
   }

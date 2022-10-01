@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class PriceCounter extends StatefulWidget {
   String? description;
   int valueMax;
-  int? valueMin;
+  int valueMin;
   int priceUnit;
   late Color color;
   PriceCounter({
@@ -19,6 +19,29 @@ class PriceCounter extends StatefulWidget {
 }
 
 class _PriceCounterState extends State<PriceCounter> {
+  late int _amount;
+  late int _total;
+
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _amount = widget.valueMin;
+    _total = widget.priceUnit * widget.valueMin;
+  }
+
+void increment(){
+  setState(() {
+    _amount = widget.valueMin++;
+   _total = widget.priceUnit * widget.valueMin;
+  });
+}
+void decrement(){
+  setState(() {
+    _amount = widget.valueMin--;
+    _total = (widget.priceUnit * widget.valueMin) - widget.priceUnit;
+  });
+}
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -48,9 +71,9 @@ class _PriceCounterState extends State<PriceCounter> {
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        IconButton(onPressed: null, icon: Icon(Icons.remove,color: widget.color,)),
-        Text('${widget.valueMin}',style: TextStyle(color: widget.color, fontSize: 25, fontWeight: FontWeight.bold),),
-        IconButton(onPressed: null, icon: Icon(Icons.add, color: widget.color,)),
+        IconButton(onPressed: decrement, icon: Icon(Icons.remove,color: widget.color,)),
+        Text('$_amount',style: TextStyle(color: widget.color, fontSize: 25, fontWeight: FontWeight.bold),),
+        IconButton(onPressed: increment, icon: Icon(Icons.add, color: widget.color,)),
       ],
     ),
     );
@@ -65,7 +88,7 @@ class _PriceCounterState extends State<PriceCounter> {
     color: widget.color,
     width: 2)
     ),
-      child: Center(child: Text('${widget.priceUnit}',style: TextStyle(color: widget.color, fontSize: 25, fontWeight: FontWeight.bold),)),
+      child: Center(child: Text('${_total}',style: TextStyle(color: widget.color, fontSize: 25, fontWeight: FontWeight.bold),)),
     );
   }
 }

@@ -21,6 +21,7 @@ class PriceCounter extends StatefulWidget {
 class _PriceCounterState extends State<PriceCounter> {
   @override
   Widget build(BuildContext context) {
+    final int counter = widget.priceUnit;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,

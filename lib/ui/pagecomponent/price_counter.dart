@@ -29,7 +29,6 @@ class PriceCounter extends StatefulWidget {
   _amount = widget.valueMin;
   _total = widget.priceUnit;
   }
-
   void increment(){
   setState(() {
     while (_amount <= widget.valueMax){

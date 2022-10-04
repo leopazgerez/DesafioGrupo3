@@ -82,22 +82,25 @@ class _PriceCounterState extends State<PriceCounter> {
   }
 
   _description() {
-    return Text(widget.description ?? '',
+    return Text(widget.description!,
         style: TextStyle(color: widget.color, fontSize: 20));
   }
 
   _counter() {
     return Container(
-      height: 40,
-      // width: 300,
+      height: 35,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(40.0),
-          border: Border.all(color: widget.color, width: 2)),
+          border: Border.all(
+              color: widget.color,
+              width: 1.5
+          )),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           IconButton(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
               onPressed: decrement,
+              iconSize: 25,
               icon: Icon(
                 Icons.remove,
                 color: widget.color,
@@ -108,10 +111,12 @@ class _PriceCounterState extends State<PriceCounter> {
                 color: widget.color, fontSize: 25, fontWeight: FontWeight.bold),
           ),
           IconButton(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              iconSize: 25,
               onPressed: increment,
               icon: Icon(
                 Icons.add,
-                color: widget.color,
+                color: widget.color
               )),
         ],
       ),
@@ -120,13 +125,12 @@ class _PriceCounterState extends State<PriceCounter> {
 
   _totalPrice() {
     return Container(
-      height: 40,
-      // width: 50,
+      height: 35,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(40.0),
-          border: Border.all(color: widget.color, width: 2)),
+          border: Border.all(color: widget.color, width: 1.5)),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Center(
           child: Text(
             '\u0024$_total',

@@ -58,7 +58,7 @@ class _PriceCounterState extends State<PriceCounter> {
     }
   }
 
-  Row _counterWithoutLabel() {
+  Widget _counterWithoutLabel() {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -69,7 +69,7 @@ class _PriceCounterState extends State<PriceCounter> {
     );
   }
 
-  Row _counterWithLabel() {
+  Widget _counterWithLabel() {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -81,12 +81,12 @@ class _PriceCounterState extends State<PriceCounter> {
     );
   }
 
-  _description() {
+  Widget _description() {
     return Text(widget.description!,
         style: TextStyle(color: widget.color, fontSize: 20));
   }
 
-  _counter() {
+  Widget _counter() {
     return Container(
       height: 35,
       decoration: BoxDecoration(
@@ -123,7 +123,7 @@ class _PriceCounterState extends State<PriceCounter> {
     );
   }
 
-  _totalPrice() {
+  Widget _totalPrice() {
     return Container(
       height: 35,
       decoration: BoxDecoration(

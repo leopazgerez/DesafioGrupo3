@@ -22,6 +22,10 @@ class PriceCounter extends StatefulWidget {
 class _PriceCounterState extends State<PriceCounter> {
   late int _amount;
   late int _total;
+  final double _height=35;
+  final double _fontsizetext=15;
+  final double _fontsizeicon=18;
+  final double _padding=5;
 
   @override
   void initState() {
@@ -61,6 +65,7 @@ class _PriceCounterState extends State<PriceCounter> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         _counter(),
+        //SizedBox(width: 10,),
         _totalPrice(),
       ],
     );
@@ -68,11 +73,13 @@ class _PriceCounterState extends State<PriceCounter> {
 
   Widget _counterWithLabel() {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         _description(),
+        const SizedBox(width: 15,),
         _counter(),
+        const SizedBox(width: 10,),
         _totalPrice(),
       ],
     );
@@ -80,12 +87,12 @@ class _PriceCounterState extends State<PriceCounter> {
 
   Widget _description() {
     return Text(widget.description!,
-        style: TextStyle(color: widget.color, fontSize: 20));
+        style: TextStyle(color: widget.color, fontSize: _fontsizetext));
   }
 
   Widget _counter() {
     return Container(
-      height: 35,
+      height: _height,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(40.0),
           border: Border.all(
@@ -95,9 +102,9 @@ class _PriceCounterState extends State<PriceCounter> {
       child: Row(
         children: [
           IconButton(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
+              //padding: EdgeInsets.symmetric(horizontal: _padding),
               onPressed: decrement,
-              iconSize: 25,
+              iconSize: _fontsizeicon,
               icon: Icon(
                 Icons.remove,
                 color: widget.color,
@@ -105,11 +112,11 @@ class _PriceCounterState extends State<PriceCounter> {
           Text(
             '$_amount',
             style: TextStyle(
-                color: widget.color, fontSize: 25, fontWeight: FontWeight.bold),
+                color: widget.color, fontSize: _fontsizeicon, fontWeight: FontWeight.bold),
           ),
           IconButton(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              iconSize: 25,
+              //padding: EdgeInsets.symmetric(horizontal: _padding),
+              iconSize: _fontsizeicon,
               onPressed: increment,
               icon: Icon(
                 Icons.add,
@@ -122,18 +129,16 @@ class _PriceCounterState extends State<PriceCounter> {
 
   Widget _totalPrice() {
     return Container(
-      height: 35,
+      padding: EdgeInsets.symmetric(horizontal: _padding + 8),
+      height: _height,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(40.0),
           border: Border.all(color: widget.color, width: 1.5)),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
-        child: Center(
-          child: Text(
-            '\u0024$_total',
-            style: TextStyle(
-            color: widget.color, fontSize: 25, fontWeight: FontWeight.bold,),
-          ),
+      child: Center(
+        child: Text(
+          '\u0024$_total',
+          style: TextStyle(
+          color: widget.color, fontSize: 20, fontWeight: FontWeight.bold,),
         ),
       ),
     );

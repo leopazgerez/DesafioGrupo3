@@ -51,11 +51,8 @@ class _PriceCounterState extends State<PriceCounter> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.description != null) {
-      return _counterWithLabel();
-    } else {
-      return _counterWithoutLabel();
-    }
+    return
+    widget.description != null ? _counterWithLabel() : _counterWithoutLabel();
   }
 
   Widget _counterWithoutLabel() {

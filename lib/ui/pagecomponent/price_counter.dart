@@ -31,7 +31,7 @@ class _PriceCounterState extends State<PriceCounter> {
   }
 
 void increment(){
-  if(_amount > 0 && _amount <= widget.valueMax) {
+  if(_amount > 0 && _amount < widget.valueMax) {
     setState(() {
       _amount++;
       _total = widget.priceUnit * _amount;
@@ -39,10 +39,10 @@ void increment(){
   }
 }
 void decrement(){
-  if(_amount > 0 && _amount >= widget.valueMin) {
+  if(_amount > 0 && _amount > widget.valueMin) {
     setState(() {
       _amount--;
-      _total = (widget.priceUnit * _amount) - widget.priceUnit;
+      _total = (widget.priceUnit * _amount);
     });
   }
 }

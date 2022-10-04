@@ -19,13 +19,13 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         // backgroundColor: Colors.red,
         body:  Padding(
-          padding: const EdgeInsets.all(70.0),
+          padding: const EdgeInsets.all(20.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+            children: const[
               PriceCounter(valueMax: 10, priceUnit: 50,valueMin: 5,),
-              const SizedBox(height: 20,),
-              PriceCounter(description: 'Pelado malo',valueMax: 10, priceUnit: 50, valueMin: 5,),
+              SizedBox(height: 20,),
+              PriceCounter(description: 'Cantidad de cartones',valueMax: 10, priceUnit: 1000,),
             ],
           ),
         )

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class PriceCounter extends StatefulWidget {
-  String? description;
-  int valueMax;
-  int valueMin;
-  int priceUnit;
-  late Color color;
-  PriceCounter(
+  final String? description;
+  final int valueMax;
+  final int valueMin;
+  final int priceUnit;
+  final Color color;
+  const PriceCounter(
       {required this.valueMax,
       required this.priceUnit,
       this.color = Colors.blue,
@@ -52,25 +52,33 @@ class _PriceCounterState extends State<PriceCounter> {
   @override
   Widget build(BuildContext context) {
     if (widget.description != null) {
-      return Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          _description(),
-          _counter(),
-          _totalPrice(),
-        ],
-      );
+      return _counterWithLabel();
     } else {
-      return Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          _counter(),
-          _totalPrice(),
-        ],
-      );
+      return _counterWithoutLabel();
     }
+  }
+
+  Row _counterWithoutLabel() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        _counter(),
+        _totalPrice(),
+      ],
+    );
+  }
+
+  Row _counterWithLabel() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        _description(),
+        _counter(),
+        _totalPrice(),
+      ],
+    );
   }
 
   _description() {
@@ -80,10 +88,10 @@ class _PriceCounterState extends State<PriceCounter> {
 
   _counter() {
     return Container(
-      height: 50,
+      height: 40,
       // width: 300,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20.0),
+          borderRadius: BorderRadius.circular(40.0),
           border: Border.all(color: widget.color, width: 2)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -112,25 +120,20 @@ class _PriceCounterState extends State<PriceCounter> {
 
   _totalPrice() {
     return Container(
-      padding: const EdgeInsets.all(10),
-      height: 50,
+      height: 40,
       // width: 50,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20.0),
+          borderRadius: BorderRadius.circular(40.0),
           border: Border.all(color: widget.color, width: 2)),
-      child: Row(
-        children: [
-          Icon(
-            Icons.attach_money,
-            color: widget.color,
-          ),
-          Center(
-              child: Text(
-            '$_total',
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Center(
+          child: Text(
+            '\u0024$_total',
             style: TextStyle(
-                color: widget.color, fontSize: 25, fontWeight: FontWeight.bold,),
-          )),
-        ],
+            color: widget.color, fontSize: 25, fontWeight: FontWeight.bold,),
+          ),
+        ),
       ),
     );
   }

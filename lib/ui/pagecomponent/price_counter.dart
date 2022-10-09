@@ -6,7 +6,9 @@ class PriceCounter extends StatefulWidget {
   final int valueMin;
   final int priceUnit;
   final Color color;
-  const PriceCounter(
+  late int totalPrice = priceUnit;
+  late int totalAmount = valueMin ;
+  PriceCounter(
       {required this.valueMax,
       required this.priceUnit,
       this.color = Colors.blue,
@@ -20,46 +22,65 @@ class PriceCounter extends StatefulWidget {
 }
 
 class _PriceCounterState extends State<PriceCounter> {
-  late int _amount;
-  late int _total;
+  //late int totalAmount;
+  //late int totalPrice;
   final double _height=35;
   final double _fontsizetext=15;
   final double _fontsizeicon=18;
   final double _padding=5;
 
   @override
-  void initState() {
+  /*void initState() {
     // TODO: implement initState
     super.initState();
-    _amount = widget.valueMin;
-    _total = widget.priceUnit * widget.valueMin;
-  }
+    widget.totalAmount = widget.valueMin;
+    widget.totalPrice = widget.priceUnit * widget.valueMin;
+  }*/
 
   void increment() {
-    if (_amount > 0 && _amount < widget.valueMax) {
+    if (widget.totalAmount > 0 && widget.totalAmount < widget.valueMax) {
       setState(() {
-        _amount++;
-        _total = widget.priceUnit * _amount;
+        widget.totalAmount++;
+        widget.totalPrice = widget.priceUnit * widget.totalAmount;
       });
     }
   }
 
   void decrement() {
-    if (_amount > 0 && _amount > widget.valueMin) {
+    if (widget.totalAmount > 0 && widget.totalAmount > widget.valueMin) {
       setState(() {
-        _amount--;
-        _total = (widget.priceUnit * _amount);
+        widget.totalAmount--;
+        widget.totalPrice = (widget.priceUnit * widget.totalAmount);
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return
-    widget.description != null ? _counterWithLabel() : _counterWithoutLabel();
+    Widget _text(){
+      if(widget.description != null){
+        return Row(
+          children: [
+            _description(),
+            const SizedBox(width: 10,),
+          ],
+        );
+      }else{
+        return SizedBox.shrink();
+      }
+    }
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Expanded(child: _text()),
+          _counter(),
+          const SizedBox(width: 10,),
+          _totalPrice(),
+    ]
+    );
   }
 
-  Widget _counterWithoutLabel() {
+  /*Widget _counterWithoutLabel() {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -83,11 +104,15 @@ class _PriceCounterState extends State<PriceCounter> {
         _totalPrice(),
       ],
     );
-  }
+  }*/
 
   Widget _description() {
-    return Text(widget.description!,
-        style: TextStyle(color: widget.color, fontSize: _fontsizetext));
+    return Row(
+      children: [
+        Text(widget.description!,
+            style: TextStyle(color: widget.color, fontSize: _fontsizetext)),
+      ],
+    );
   }
 
   Widget _counter() {
@@ -110,7 +135,7 @@ class _PriceCounterState extends State<PriceCounter> {
                 color: widget.color,
               )),
           Text(
-            '$_amount',
+            widget.totalAmount.toString(),
             style: TextStyle(
                 color: widget.color, fontSize: _fontsizeicon, fontWeight: FontWeight.bold),
           ),
@@ -136,7 +161,7 @@ class _PriceCounterState extends State<PriceCounter> {
           border: Border.all(color: widget.color, width: 1.5)),
       child: Center(
         child: Text(
-          '\u0024$_total',
+          "\u0024" + widget.totalPrice.toString(),
           style: TextStyle(
           color: widget.color, fontSize: 20, fontWeight: FontWeight.bold,),
         ),

@@ -22,10 +22,10 @@ class MyApp extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const[
-              PriceCounter(valueMax:10, priceUnit: 1400,valueMin: 2,),
-              SizedBox(height: 20,),
-              PriceCounter(description: 'Cantidad de cartones',valueMax:30, priceUnit:1300,),
+            children: [
+              PriceCounter(valueMax:10, priceUnit: 10000,valueMin: 2),
+              const SizedBox(height: 20,),
+              PriceCounter(description: 'Cantidad de cartones',valueMax:30, priceUnit:13000,),
             ],
           ),
         )

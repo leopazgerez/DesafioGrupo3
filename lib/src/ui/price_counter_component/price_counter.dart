@@ -26,11 +26,13 @@ class PriceCounter extends StatefulWidget {
 
   late int _amount = widget.valueMin;
   late int _total = widget.bingoTicketModel.priceUnit * _amount;
+
   final double _fontSize = 15;
-  final double _dataSize = 18;
+  final double _dataSize = 20;
   final double _height = 35;
-  final double _iconSize = 20;
-  final double _widthBox = 1.5;
+  final double _iconSize = 22;
+  final double _widthBoxBorder = 1.5;
+  final EdgeInsets _padding = const EdgeInsets.all(5);
 
   void increment() {
     if (_amount > 0 && _amount < widget.valueMax) {
@@ -52,6 +54,7 @@ class PriceCounter extends StatefulWidget {
 
   @override
   Widget build(BuildContext context) {
+
     Widget visibleText(){
       if(widget.label != null){
         return Row(
@@ -65,7 +68,7 @@ class PriceCounter extends StatefulWidget {
       }
     }
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(2.5),
       child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -88,31 +91,39 @@ class PriceCounter extends StatefulWidget {
           borderRadius: BorderRadius.circular(40.0),
           border: Border.all(
               color: widget.color,
-              width: _widthBox
+              width: _widthBoxBorder
           )),
       child: Row(
         children: [
-          IconButton(
-            //padding: EdgeInsets.symmetric(horizontal: _padding),
-              onPressed: decrement,
-              iconSize: _iconSize,
-              icon: Icon(
+          GestureDetector(
+            onTap: decrement,
+            child: Padding(
+              padding: _padding,
+              child: Icon(
                 Icons.remove,
                 color: widget.color,
-              )),
+                size: _iconSize,
+              ),
+            ),
+          ),
+          const SizedBox(width: 5,),
           Text(
             _amount.toString(),
             style: TextStyle(
                 color: widget.color, fontSize: _dataSize, fontWeight: FontWeight.bold),
           ),
-          IconButton(
-            //padding: EdgeInsets.symmetric(horizontal: _padding),
-              iconSize: _iconSize,
-              onPressed: increment,
-              icon: Icon(
-                  Icons.add,
-                  color: widget.color
-              )),
+          const SizedBox(width: 5,),
+          GestureDetector(
+            onTap: increment,
+            child: Padding(
+              padding: _padding,
+              child: Icon(
+                Icons.add,
+                color: widget.color,
+                size: _iconSize,
+              ),
+            ),
+          ),
         ],
       ),
     );

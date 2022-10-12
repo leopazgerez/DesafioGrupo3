@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
+import '../../models/bingo_ticket_model.dart';
+
 
 class PriceCounter extends StatefulWidget {
-  final String? description;
+  final String? label;
   final int valueMax;
-  late int valueMin;
-  final int priceUnit;
-  late Color color;
-  PriceCounter({
+  //late int valueMin;
+  final BingoTicketModel bingoTicketModel;
+  //final int priceUnit;
+  final Color color;
+  const PriceCounter({
+    required this.bingoTicketModel,
     required this.valueMax,
-    required this.priceUnit,
+  //required this.priceUnit,
     this.color = Colors.blue,
-    this.description,
-    this.valueMin = 1,
+    this.label,
+  //this.valueMin = 1,
     Key? key}) : super(key: key);
 
   @override
@@ -21,28 +25,31 @@ class PriceCounter extends StatefulWidget {
   class _PriceCounterState extends State<PriceCounter> {
   late int _amount;
   late int _total;
+  late int valueMin = 1;
 
   @override
   void initState() {
   // TODO: implement initState
   super.initState();
-  _amount = widget.valueMin;
-  _total = widget.priceUnit;
+  _amount = valueMin;
+  _total = widget.bingoTicketModel.priceUnit;
   }
+
   void increment(){
   setState(() {
-    while (_amount <= widget.valueMax){
-      _total = widget.priceUnit * widget.valueMin;
+    if (_amount < widget.valueMax){
+      _total = widget.bingoTicketModel.priceUnit * valueMin;
     }
-    _amount = widget.valueMin++;
+    _amount = valueMin++;
   });
   }
+
   void decrement(){
   setState(() {
-    while (_amount >= widget.valueMin){
-      _total = widget.priceUnit * widget.valueMin;
+    if (_amount > valueMin){
+      _total = widget.bingoTicketModel.priceUnit * valueMin;
     }
-    _amount = widget.valueMin--;
+    _amount = valueMin--;
 
   });
   }
@@ -50,7 +57,7 @@ class PriceCounter extends StatefulWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(5),
+      padding: const EdgeInsets.all(8),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -64,7 +71,7 @@ class PriceCounter extends StatefulWidget {
   }
 
   _description(){
-    return Text('${widget.description}',style: TextStyle(color: widget.color, fontSize: 20));
+    return Text('${widget.label}',style: TextStyle(color: widget.color, fontSize: 20));
   }
   _counter(){
     return Container(

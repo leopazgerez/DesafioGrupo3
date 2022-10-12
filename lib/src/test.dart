@@ -11,12 +11,18 @@ class Test extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      body: Center(
-        child: PriceCounter(
-          label: 'Cantidad de cartones',
-          bingoTicketModel: bingoTicketModel,
-          valueMax: 20,
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          PriceCounter(
+            label: 'Cantidad de cartones',
+            bingoTicketModel: bingoTicketModel,
+            valueMax: 20,
+          ),
+          PriceCounter(
+              bingoTicketModel: bingoTicketModel,
+              valueMax: 20)
+        ],
       ),
     );
   }

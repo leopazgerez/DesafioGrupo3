@@ -5,7 +5,7 @@ import '../../models/bingo_ticket_model.dart';
 class PriceCounter extends StatefulWidget {
   final String? label;
   final int valueMax;
-  //late int valueMin;
+  final int valueMin;
   final BingoTicketModel bingoTicketModel;
   //final int priceUnit;
   final Color color;
@@ -15,7 +15,7 @@ class PriceCounter extends StatefulWidget {
   //required this.priceUnit,
     this.color = Colors.blue,
     this.label,
-  //this.valueMin = 1,
+    this.valueMin = 1,
     Key? key}) : super(key: key);
 
   @override
@@ -23,35 +23,25 @@ class PriceCounter extends StatefulWidget {
 }
 
   class _PriceCounterState extends State<PriceCounter> {
-  late int _amount;
-  late int _total;
-  late int valueMin = 1;
+  late int _amount = widget.valueMin;
+  late int _total = widget.bingoTicketModel.priceUnit * _amount;
 
-  @override
-  void initState() {
-  // TODO: implement initState
-  super.initState();
-  _amount = valueMin;
-  _total = widget.bingoTicketModel.priceUnit;
+  void increment() {
+    if (_amount > 0 && _amount < widget.valueMax) {
+      setState(() {
+        _amount++;
+        _total = widget.bingoTicketModel.priceUnit * _amount;
+      });
+    }
   }
 
-  void increment(){
-  setState(() {
-    if (_amount < widget.valueMax){
-      _total = widget.bingoTicketModel.priceUnit * valueMin;
+  void decrement() {
+    if (_amount > 0 && _amount > widget.valueMin) {
+      setState(() {
+        _amount--;
+        _total = (widget.bingoTicketModel.priceUnit * _amount);
+      });
     }
-    _amount = valueMin++;
-  });
-  }
-
-  void decrement(){
-  setState(() {
-    if (_amount > valueMin){
-      _total = widget.bingoTicketModel.priceUnit * valueMin;
-    }
-    _amount = valueMin--;
-
-  });
   }
 
   @override

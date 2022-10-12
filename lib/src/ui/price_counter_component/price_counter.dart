@@ -27,7 +27,10 @@ class PriceCounter extends StatefulWidget {
   late int _amount = widget.valueMin;
   late int _total = widget.bingoTicketModel.priceUnit * _amount;
   final double _fontSize = 15;
-  final double _styleSize = 18;
+  final double _dataSize = 18;
+  final double _height = 35;
+  final double _iconSize = 20;
+  final double _widthBox = 1.5;
 
   void increment() {
     if (_amount > 0 && _amount < widget.valueMax) {
@@ -78,40 +81,56 @@ class PriceCounter extends StatefulWidget {
   _label(){
     return Text('${widget.label}',style: TextStyle(color: widget.color, fontSize: _fontSize));
   }
-  _counter(){
+  Widget _counter() {
     return Container(
-        height: 50,
-        decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20.0),
-    border: Border.all(
-    color: widget.color,
-    width: 2)
-    ),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        IconButton(onPressed: decrement, icon: Icon(Icons.remove,color: widget.color,)),
-        Text('$_amount',style: TextStyle(color: widget.color, fontSize: _styleSize, fontWeight: FontWeight.bold),),
-        IconButton(onPressed: increment, icon: Icon(Icons.add, color: widget.color,)),
-      ],
-    ),
-    );
-  }
-  _totalPrice(){
-    return Container(
-      padding: const EdgeInsets.only(right: 5),
-      height: 50,
+      height: _height,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20.0),
+          borderRadius: BorderRadius.circular(40.0),
           border: Border.all(
               color: widget.color,
-              width: 2)
-      ),
+              width: _widthBox
+          )),
       child: Row(
         children: [
-          Icon(Icons.attach_money, color: widget.color,),
-          Center(child: Text('$_total',style: TextStyle(color: widget.color, fontSize: _styleSize, fontWeight: FontWeight.bold),)),
+          IconButton(
+            //padding: EdgeInsets.symmetric(horizontal: _padding),
+              onPressed: decrement,
+              iconSize: _iconSize,
+              icon: Icon(
+                Icons.remove,
+                color: widget.color,
+              )),
+          Text(
+            _amount.toString(),
+            style: TextStyle(
+                color: widget.color, fontSize: _dataSize, fontWeight: FontWeight.bold),
+          ),
+          IconButton(
+            //padding: EdgeInsets.symmetric(horizontal: _padding),
+              iconSize: _iconSize,
+              onPressed: increment,
+              icon: Icon(
+                  Icons.add,
+                  color: widget.color
+              )),
         ],
+      ),
+    );
+  }
+
+  Widget _totalPrice() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      height: _height,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(40.0),
+          border: Border.all(color: widget.color, width: 1.5)),
+      child: Center(
+        child: Text(
+          "\u0024$_total",
+          style: TextStyle(
+            color: widget.color, fontSize: _dataSize, fontWeight: FontWeight.bold,),
+        ),
       ),
     );
   }

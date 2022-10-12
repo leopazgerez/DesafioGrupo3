@@ -161,7 +161,7 @@ class _PriceCounterState extends State<PriceCounter> {
           border: Border.all(color: widget.color, width: 1.5)),
       child: Center(
         child: Text(
-          "\u0024" + widget.totalPrice.toString(),
+          "\u0024${widget.totalPrice}",
           style: TextStyle(
           color: widget.color, fontSize: 20, fontWeight: FontWeight.bold,),
         ),

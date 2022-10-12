@@ -1,5 +1,6 @@
-import 'package:desafiogrupotres/ui/pagecomponent/price_counter.dart';
+import 'package:desafiogrupotres/src/ui/price_counter_component/price_counter.dart';
 import 'package:flutter/material.dart';
+
 
 void main() {
   runApp(const MyApp());

@@ -1,3 +1,4 @@
+import 'package:desafiogrupotres/src/ui/custom_button_circular_component.dart';
 import 'package:desafiogrupotres/src/ui/price_counter_component/price_counter.dart';
 import 'package:flutter/material.dart';
 import 'package:desafiogrupotres/src/models/bingo_ticket_model.dart';
@@ -42,21 +43,14 @@ class Test extends StatelessWidget {
             label: 'Cantidad de bingos',
           ),
           const SizedBox(height: 20,),
-          _bottonRandom(context),
+          CustomButton(
+            text: 'Comprar',
+            backgroundColor: Theme.of(context).primaryColor,
+            height: 50,
+            textSize: 20,
+          ),
         ],
       ),
-    );
-  }
-  Widget _bottonRandom(context){
-    return MaterialButton(
-      onPressed: (){},
-      minWidth: 250,
-      height: 45,
-      color: Theme.of(context).primaryColor,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(40),
-    ),
-      child: const Text('Comprar', style: TextStyle(color: Colors.white, fontSize: 15),),
     );
   }
 }

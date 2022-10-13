@@ -7,12 +7,10 @@ class PriceCounter extends StatefulWidget {
   final int valueMax;
   final int valueMin;
   final BingoTicketModel bingoTicketModel;
-  //final int priceUnit;
   final Color color;
   const PriceCounter({
     required this.bingoTicketModel,
     required this.valueMax,
-  //required this.priceUnit,
     this.color = Colors.blue,
     this.label,
     this.valueMin = 1,
@@ -84,6 +82,7 @@ class PriceCounter extends StatefulWidget {
   _label(){
     return Text('${widget.label}',style: TextStyle(color: widget.color, fontSize: _fontSize));
   }
+
   Widget _counter() {
     return Container(
       height: _height,

@@ -13,11 +13,9 @@ class Test extends StatelessWidget {
     return Scaffold(
       body: Container(
         color: Theme.of(context).primaryColor,
-
         child: Column(
           //mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _randomComponent(),
             const Expanded(child: SizedBox(width: 100,)),
             _testComponent(context),
           ],
@@ -25,16 +23,7 @@ class Test extends StatelessWidget {
       ),
     );
   }
-  Widget _randomComponent(){
-    return Container(
-      height: 355,
-      width: 300,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: Colors.white,
-      ),
-    );
-  }
+
   Widget _testComponent(context){
     return Container(
       padding: const EdgeInsets.all(20),
@@ -61,13 +50,13 @@ class Test extends StatelessWidget {
   Widget _bottonRandom(context){
     return MaterialButton(
       onPressed: (){},
-      minWidth: 200,
-      height: 50,
+      minWidth: 250,
+      height: 45,
       color: Theme.of(context).primaryColor,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(40),
     ),
-      child: const Text('Comprar'),
+      child: const Text('Comprar', style: TextStyle(color: Colors.white, fontSize: 15),),
     );
   }
 }

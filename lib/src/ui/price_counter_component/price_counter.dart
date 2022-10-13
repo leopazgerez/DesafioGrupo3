@@ -68,7 +68,7 @@ class PriceCounter extends StatefulWidget {
       }
     }
     return Padding(
-      padding: const EdgeInsets.all(2.5),
+      padding: const EdgeInsets.all(5),
       child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [

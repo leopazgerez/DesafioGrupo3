@@ -12,26 +12,64 @@ class Test extends StatelessWidget {
 
     return Scaffold(
       body: Container(
-        color: Colors.grey,
-        //height: 60,
+        color: Theme.of(context).primaryColor,
+
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          //mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              color: Colors.black,
-              width: 350,
-              child: PriceCounter(
-                label: 'Cantidad de cartones',
-                bingoTicketModel: bingoTicketModel,
-                valueMax: 20,
-              ),
-            ),
-            PriceCounter(
-                bingoTicketModel: bingoTicketModel,
-                valueMax: 20)
+            _randomComponent(),
+            const Expanded(child: SizedBox(width: 100,)),
+            _testComponent(context),
           ],
         ),
       ),
+    );
+  }
+  Widget _randomComponent(){
+    return Container(
+      height: 355,
+      width: 300,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.white,
+      ),
+    );
+  }
+  Widget _testComponent(context){
+    return Container(
+      padding: const EdgeInsets.all(20),
+      width: double.infinity,
+      height: 200,
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(12)),
+        image: DecorationImage(
+          image: AssetImage('backgroundGeometric.webp'),
+          fit: BoxFit.cover,
+        )
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          PriceCounter(
+            bingoTicketModel: bingoTicketModel,
+            valueMax: 20,
+            label: 'Cantidad de bingos',
+          ),
+          const SizedBox(height: 20,),
+          _bottonRandom(context),
+        ],
+      ),
+    );
+  }
+  Widget _bottonRandom(context){
+    return MaterialButton(
+      onPressed: (){},
+      minWidth: 200,
+      height: 50,
+      color: Theme.of(context).primaryColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+    ),
     );
   }
 }

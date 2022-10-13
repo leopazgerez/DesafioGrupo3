@@ -6,7 +6,7 @@ import 'package:desafiogrupotres/src/models/bingo_ticket_model.dart';
 class Test extends StatelessWidget {
   Test({Key? key}) : super(key: key);
 
-  late var bingoTicketModel = BingoTicketModel(priceUnit: 1000);
+  late var bingoTicketModel = BingoTicketModel(priceUnit: 1500);
   @override
   Widget build(BuildContext context) {
 
@@ -42,10 +42,7 @@ class Test extends StatelessWidget {
       height: 200,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(12)),
-        image: DecorationImage(
-          image: AssetImage('backgroundGeometric.webp'),
-          fit: BoxFit.cover,
-        )
+       color: Colors.white,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -70,6 +67,7 @@ class Test extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
     ),
+      child: const Text('Comprar'),
     );
   }
 }

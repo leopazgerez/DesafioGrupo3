@@ -39,7 +39,7 @@ class Test extends StatelessWidget {
           PriceCounter(
             bingoTicketModel: bingoTicketModel,
             valueMax: 20,
-            label: 'Cantidad de bingos',
+            label: 'Cantidad de cartones',
           ),
           const SizedBox(height: 20,),
           _bottonRandom(context),

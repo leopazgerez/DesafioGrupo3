@@ -25,10 +25,10 @@ class PriceCounter extends StatefulWidget {
   late int _amount = widget.valueMin;
   late int _total = widget.bingoTicketModel.priceUnit * _amount;
 
-  final double _fontSize = 15;
-  final double _dataSize = 20;
-  final double _height = 35;
-  final double _iconSize = 22;
+  final double _fontSize = 20;
+  final double _dataSize = 25;
+  final double _height = 40;
+  final double _iconSize = 25;
   final double _widthBoxBorder = 1.5;
   final EdgeInsets _padding = const EdgeInsets.all(5);
 
@@ -58,7 +58,7 @@ class PriceCounter extends StatefulWidget {
         return Row(
           children: [
             _label(),
-            const SizedBox(width: 10,),
+            const SizedBox(width: 5,),
           ],
         );
       }else{
@@ -72,65 +72,74 @@ class PriceCounter extends StatefulWidget {
           children: [
             Expanded(child: visibleText()),
             _counter(),
-            const SizedBox(width: 10,),
+            // const SizedBox(width: 15,),
             _totalPrice(),
           ]
       ),
     );
   }
 
-  _label(){
-    return Text('${widget.label}',style: TextStyle(color: widget.color, fontSize: _fontSize));
+  Widget _label(){
+    return Text('${widget.label}',style: TextStyle(color: widget.color,
+        fontSize: _fontSize));
   }
 
   Widget _counter() {
-    return Container(
-      height: _height,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(40.0),
-          border: Border.all(
-              color: widget.color,
-              width: _widthBoxBorder
-          )),
-      child: Row(
-        children: [
-          GestureDetector(
-            onTap: decrement,
-            child: Padding(
-              padding: _padding,
-              child: Icon(
-                Icons.remove,
-                color: widget.color,
-                size: _iconSize,
-              ),
+    return Row(
+      children: [
+        Container(
+          height: _height,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(40.0),
+              border: Border.all(
+                  color: widget.color,
+                  width: _widthBoxBorder
+              )),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5.0),
+            child: Row(
+              children: [
+                GestureDetector(
+                  onTap: decrement,
+                  child: Padding(
+                    padding: _padding,
+                    child: Icon(
+                      Icons.remove,
+                      color: widget.color,
+                      size: _iconSize,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 5,),
+                Text(
+                  _amount.toString(),
+                  style: TextStyle(
+                      color: widget.color, fontSize: _dataSize, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(width: 5,),
+                GestureDetector(
+                  onTap: increment,
+                  child: Padding(
+                    padding: _padding,
+                    child: Icon(
+                      Icons.add,
+                      color: widget.color,
+                      size: _iconSize,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-          const SizedBox(width: 5,),
-          Text(
-            _amount.toString(),
-            style: TextStyle(
-                color: widget.color, fontSize: _dataSize, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(width: 5,),
-          GestureDetector(
-            onTap: increment,
-            child: Padding(
-              padding: _padding,
-              child: Icon(
-                Icons.add,
-                color: widget.color,
-                size: _iconSize,
-              ),
-            ),
-          ),
-        ],
-      ),
+        ),
+        const SizedBox(width: 10),
+      ],
     );
   }
 
   Widget _totalPrice() {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 15),
       height: _height,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(40.0),

@@ -31,7 +31,7 @@ class Test extends StatelessWidget {
       width: double.infinity,
       height: 200,
       decoration: const BoxDecoration(
-        borderRadius: BorderRadius.only(topLeft: Radius.circular(12), topRight: Radius.circular(12)),
+        borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
        color: Colors.white,
       ),
       child: Column(

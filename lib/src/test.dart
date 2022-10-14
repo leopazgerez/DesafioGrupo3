@@ -7,13 +7,13 @@ import 'package:desafiogrupotres/src/models/bingo_ticket_model.dart';
 class Test extends StatelessWidget {
   Test({Key? key}) : super(key: key);
 
-  late var bingoTicketModel = BingoTicketModel(priceUnit: 1500);
+  late var bingoTicketModel = BingoTicketModel(priceUnit: 2000);
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
       body: Container(
-        color: Theme.of(context).primaryColor,
+        color: const Color(0xff35A4A3),
         child: Column(
           //mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -26,6 +26,17 @@ class Test extends StatelessWidget {
   }
 
   Widget _testComponent(context){
+    late int amount=0;
+    late int total=0;
+
+    int getAmount(int amountWidget){
+      return amountWidget;
+    }
+
+    int getTotalPrice(int totalPriceWidget){
+      return totalPriceWidget;
+    }
+
     return Container(
       padding: const EdgeInsets.all(20),
       width: double.infinity,
@@ -39,15 +50,23 @@ class Test extends StatelessWidget {
         children: [
           PriceCounter(
             bingoTicketModel: bingoTicketModel,
-            valueMax: 20,
+            valueMax: 30,
+            color: const Color(0xff35A4A3),
             label: 'Cantidad de cartones',
+            getShop: (int amountBingos,int totalPrice){
+              total = getTotalPrice(totalPrice);
+              amount = getAmount(amountBingos);
+            },
           ),
           const SizedBox(height: 20,),
           CustomButton(
             text: 'Comprar',
-            backgroundColor: Theme.of(context).primaryColor,
+            backgroundColor: const Color(0xff35A4A3),
             height: 50,
             textSize: 20,
+            onTap: (){
+              print("Cartones = " + amount.toString() + " Precio Total = " + total.toString() );
+            },
           ),
         ],
       ),

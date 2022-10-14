@@ -8,20 +8,16 @@ class PriceCounter extends StatefulWidget {
   final int valueMin;
   final BingoTicketModel bingoTicketModel;
   final Color color;
-  final double fontSize;
-  final double dataSize;
-  final double iconSize;
-  final double height;
-  const PriceCounter({
+  late int amount = valueMin;
+  late int total = bingoTicketModel.priceUnit * amount;
+  final Function getShop;
+  PriceCounter({
     required this.bingoTicketModel,
     required this.valueMax,
     this.color = Colors.blue,
     this.label,
     this.valueMin = 1,
-    this.fontSize = 15,
-    this.dataSize = 20,
-    this.iconSize = 22,
-    this.height = 40,
+    required this.getShop,
     Key? key}) : super(key: key);
 
   @override
@@ -29,26 +25,34 @@ class PriceCounter extends StatefulWidget {
 }
 
   class _PriceCounterState extends State<PriceCounter> {
+  final double fontSize = 18;
+  final double dataSize = 22;
+  final double iconSize = 22;
+  final double height = 33;
+  final double widthBoxBorder = 1.5;
+  final EdgeInsets padding = const EdgeInsets.all(5);
 
-  late int _amount = widget.valueMin;
-  late int _total = widget.bingoTicketModel.priceUnit * _amount;
-  final double _widthBoxBorder = 1.5;
-  final EdgeInsets _padding = const EdgeInsets.all(5);
+  @override
+  void initState() {
+    // TODO: implement initState
+    widget.getShop(widget.amount,widget.total);
+    super.initState();
+  }
 
   void increment() {
-    if (_amount > 0 && _amount < widget.valueMax) {
+    if (widget.amount> 0 && widget.amount < widget.valueMax) {
       setState(() {
-        _amount++;
-        _total = widget.bingoTicketModel.priceUnit * _amount;
+        widget.amount++;
+        widget.total = widget.bingoTicketModel.priceUnit * widget.amount;
       });
     }
   }
 
   void decrement() {
-    if (_amount > 0 && _amount > widget.valueMin) {
+    if (widget.amount > 0 && widget.amount > widget.valueMin) {
       setState(() {
-        _amount--;
-        _total = (widget.bingoTicketModel.priceUnit * _amount);
+        widget.amount--;
+        widget.total = (widget.bingoTicketModel.priceUnit * widget.amount);
       });
     }
   }
@@ -61,7 +65,7 @@ class PriceCounter extends StatefulWidget {
         return Row(
           children: [
             _label(),
-            const SizedBox(width: 5,),
+            const SizedBox(width: 2.5),
           ],
         );
       }else{
@@ -72,17 +76,25 @@ class PriceCounter extends StatefulWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Expanded(child: visibleText()),
-          _counter(),
-          // const SizedBox(width: 15,),
-          _totalPrice(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _counter(),
+              const SizedBox(width: 10),
+              _totalPrice(),
+            ],
+          ),
         ]
     );
   }
 
   Widget _label(){
     return Expanded(
-      child: Text('${widget.label}',style: TextStyle(color: widget.color,
-          fontSize: widget.fontSize)),
+      child: Text('${widget.label}',
+        style: TextStyle(color: widget.color,fontSize: fontSize),
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      ),
     );
   }
 
@@ -90,43 +102,50 @@ class PriceCounter extends StatefulWidget {
     return Row(
       children: [
         Container(
-          height: widget.height,
+          height: height,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(40.0),
               border: Border.all(
                   color: widget.color,
-                  width: _widthBoxBorder
+                  width: widthBoxBorder
               )),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5.0),
             child: Row(
               children: [
                 GestureDetector(
-                  onTap: decrement,
+                  onTap:(){
+                    decrement();
+                    widget.getShop(widget.amount,widget.total);
+                  },
                   child: Padding(
-                    padding: _padding,
+                    padding: padding,
                     child: Icon(
                       Icons.remove,
                       color: widget.color,
-                      size: widget.iconSize,
+                      size: iconSize,
                     ),
                   ),
                 ),
-                const SizedBox(width: 5,),
-                Text(
-                  _amount.toString(),
-                  style: TextStyle(
-                      color: widget.color, fontSize: widget.dataSize, fontWeight: FontWeight.bold),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 2.5),
+                  child: Text(
+                    widget.amount.toString(),
+                    style: TextStyle(
+                        color: widget.color, fontSize:dataSize, fontWeight: FontWeight.bold),
+                  ),
                 ),
-                const SizedBox(width: 5,),
                 GestureDetector(
-                  onTap: increment,
-                  child: Padding(
-                    padding: _padding,
+                    onTap: (){
+                      increment();
+                      widget.getShop(widget.amount,widget.total);
+                    },
+                    child: Padding(
+                    padding: padding,
                     child: Icon(
                       Icons.add,
                       color: widget.color,
-                      size: widget.iconSize,
+                      size: iconSize,
                     ),
                   ),
                 ),
@@ -134,7 +153,6 @@ class PriceCounter extends StatefulWidget {
             ),
           ),
         ),
-        const SizedBox(width: 10),
       ],
     );
   }
@@ -142,15 +160,15 @@ class PriceCounter extends StatefulWidget {
   Widget _totalPrice() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15),
-      height: widget.height,
+      height: height,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(40.0),
           border: Border.all(color: widget.color, width: 1.5)),
       child: Center(
         child: Text(
-          "\u0024$_total",
+          "\u0024${widget.total}",
           style: TextStyle(
-            color: widget.color, fontSize: widget.dataSize, fontWeight: FontWeight.bold,),
+            color: widget.color, fontSize: dataSize, fontWeight: FontWeight.bold,),
         ),
       ),
     );

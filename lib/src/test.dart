@@ -26,6 +26,9 @@ class Test extends StatelessWidget {
   }
 
   Widget _testComponent(context){
+    int _bingos;
+    int _total;
+
     return Container(
       padding: const EdgeInsets.all(20),
       width: double.infinity,
@@ -41,7 +44,10 @@ class Test extends StatelessWidget {
             bingoTicketModel: bingoTicketModel,
             valueMax: 20,
             label: 'Cantidad de cartones',
-            getShop: ,
+            getShop: (int bingo,  int total){
+              _bingos = bingo;
+              _total = total;
+            },
           ),
           const SizedBox(height: 20,),
           CustomButton(
@@ -49,7 +55,9 @@ class Test extends StatelessWidget {
             backgroundColor: Theme.of(context).primaryColor,
             height: 50,
             textSize: 20,
-            onTap: ,
+            onTap: (){
+              print('Cantidad de cartones'_bingos.toString(), 'Precio total' _total.toString() );
+            },
           ),
         ],
       ),

@@ -39,6 +39,7 @@ class PriceCounter extends StatefulWidget {
 
   @override
   void initState(){
+    widget.getShop(_amount,_total);
     super.initState();
   }
 

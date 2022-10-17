@@ -41,6 +41,7 @@ class Test extends StatelessWidget {
             bingoTicketModel: bingoTicketModel,
             valueMax: 20,
             label: 'Cantidad de cartones',
+            getShop: ,
           ),
           const SizedBox(height: 20,),
           CustomButton(
@@ -48,6 +49,7 @@ class Test extends StatelessWidget {
             backgroundColor: Theme.of(context).primaryColor,
             height: 50,
             textSize: 20,
+            onTap: ,
           ),
         ],
       ),

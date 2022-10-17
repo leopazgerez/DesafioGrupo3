@@ -113,7 +113,10 @@ class PriceCounter extends StatefulWidget {
             child: Row(
               children: [
                 GestureDetector(
-                  onTap: decrement,
+                  onTap: (){
+                    decrement();
+                    widget.getShop(_amount,_total);
+                    },
                   child: Padding(
                     padding: _padding,
                     child: Icon(
@@ -131,7 +134,10 @@ class PriceCounter extends StatefulWidget {
                 ),
                 const SizedBox(width: 5,),
                 GestureDetector(
-                  onTap: increment,
+                  onTap: (){
+                    increment();
+                    widget.getShop(_amount,_total);
+                  },
                   child: Padding(
                     padding: _padding,
                     child: Icon(

@@ -12,6 +12,7 @@ class PriceCounter extends StatefulWidget {
   final double dataSize;
   final double iconSize;
   final double height;
+  final Function getShop;
   const PriceCounter({
     required this.bingoTicketModel,
     required this.valueMax,
@@ -22,6 +23,7 @@ class PriceCounter extends StatefulWidget {
     this.dataSize = 20,
     this.iconSize = 22,
     this.height = 40,
+    required this.getShop,
     Key? key}) : super(key: key);
 
   @override
@@ -34,6 +36,11 @@ class PriceCounter extends StatefulWidget {
   late int _total = widget.bingoTicketModel.priceUnit * _amount;
   final double _widthBoxBorder = 1.5;
   final EdgeInsets _padding = const EdgeInsets.all(5);
+
+  @override
+  void initState(){
+    super.initState();
+  }
 
   void increment() {
     if (_amount > 0 && _amount < widget.valueMax) {
@@ -81,8 +88,11 @@ class PriceCounter extends StatefulWidget {
 
   Widget _label(){
     return Expanded(
-      child: Text('${widget.label}',style: TextStyle(color: widget.color,
-          fontSize: widget.fontSize)),
+      child: Text('${widget.label}',style: TextStyle(
+        color: widget.color,
+        fontSize: widget.fontSize,
+        overflow: TextOverflow.ellipsis,
+      )),
     );
   }
 

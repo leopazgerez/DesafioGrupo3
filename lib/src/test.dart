@@ -26,8 +26,8 @@ class Test extends StatelessWidget {
   }
 
   Widget _testComponent(context){
-    int bingos;
-    int total;
+    int bingos = 0;
+    int total = 0;
 
     int getTotal(int total){
       return total;
@@ -63,7 +63,7 @@ class Test extends StatelessWidget {
             height: 50,
             textSize: 20,
             onTap: (){
-              print('Cantindad de cartones = ${bingos.toString()} ');
+              print('Cantindad de cartones = ${bingos.toString()}  Total = ${total.toString()}');
             },
           ),
         ],

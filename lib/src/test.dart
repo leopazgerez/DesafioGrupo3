@@ -26,8 +26,15 @@ class Test extends StatelessWidget {
   }
 
   Widget _testComponent(context){
-    int _bingos;
-    int _total;
+    int bingos;
+    int total;
+
+    int getTotal(int total){
+      return total;
+    }
+    int getBingo(int bingo){
+      return bingo;
+    }
 
     return Container(
       padding: const EdgeInsets.all(20),
@@ -45,8 +52,8 @@ class Test extends StatelessWidget {
             valueMax: 20,
             label: 'Cantidad de cartones',
             getShop: (int bingo,  int total){
-              _bingos = bingo;
-              _total = total;
+              bingos = getBingo(bingo);
+              total = getTotal(total);
             },
           ),
           const SizedBox(height: 20,),
@@ -56,7 +63,7 @@ class Test extends StatelessWidget {
             height: 50,
             textSize: 20,
             onTap: (){
-              print('Cantidad de cartones'_bingos.toString(), 'Precio total' _total.toString() );
+              print('Cantindad de cartones = ${bingos.toString()} ');
             },
           ),
         ],

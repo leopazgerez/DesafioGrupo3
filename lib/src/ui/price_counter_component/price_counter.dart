@@ -32,31 +32,31 @@ class PriceCounter extends StatefulWidget {
 
   class _PriceCounterState extends State<PriceCounter> {
 
-  late int _amount = widget.valueMin;
-  late int _total = widget.bingoTicketModel.priceUnit * _amount;
+  late int amount = widget.valueMin;
+  late int total = widget.bingoTicketModel.priceUnit * amount;
   final double _widthBoxBorder = 1.5;
   final EdgeInsets _padding = const EdgeInsets.all(5);
 
   @override
   void initState(){
-    widget.getShop(_amount,_total);
+    widget.getShop(amount,total);
     super.initState();
   }
 
   void increment() {
-    if (_amount > 0 && _amount < widget.valueMax) {
+    if (amount > 0 && amount < widget.valueMax) {
       setState(() {
-        _amount++;
-        _total = widget.bingoTicketModel.priceUnit * _amount;
+        amount++;
+        total = widget.bingoTicketModel.priceUnit * amount;
       });
     }
   }
 
   void decrement() {
-    if (_amount > 0 && _amount > widget.valueMin) {
+    if (amount > 0 && amount > widget.valueMin) {
       setState(() {
-        _amount--;
-        _total = (widget.bingoTicketModel.priceUnit * _amount);
+        amount--;
+        total = (widget.bingoTicketModel.priceUnit * amount);
       });
     }
   }
@@ -115,7 +115,7 @@ class PriceCounter extends StatefulWidget {
                 GestureDetector(
                   onTap: (){
                     decrement();
-                    widget.getShop(_amount,_total);
+                    widget.getShop(amount,total);
                     },
                   child: Padding(
                     padding: _padding,
@@ -128,7 +128,7 @@ class PriceCounter extends StatefulWidget {
                 ),
                 const SizedBox(width: 5,),
                 Text(
-                  _amount.toString(),
+                  amount.toString(),
                   style: TextStyle(
                       color: widget.color, fontSize: widget.dataSize, fontWeight: FontWeight.bold),
                 ),
@@ -136,7 +136,7 @@ class PriceCounter extends StatefulWidget {
                 GestureDetector(
                   onTap: (){
                     increment();
-                    widget.getShop(_amount,_total);
+                    widget.getShop(amount,total);
                   },
                   child: Padding(
                     padding: _padding,
@@ -165,7 +165,7 @@ class PriceCounter extends StatefulWidget {
           border: Border.all(color: widget.color, width: 1.5)),
       child: Center(
         child: Text(
-          "\u0024$_total",
+          "\u0024$total",
           style: TextStyle(
             color: widget.color, fontSize: widget.dataSize, fontWeight: FontWeight.bold,),
         ),

@@ -51,9 +51,9 @@ class Test extends StatelessWidget {
             bingoTicketModel: bingoTicketModel,
             valueMax: 20,
             label: 'Cantidad de cartones',
-            getShop: (int bingo,  int total){
+            getShop: (int bingo,  int totality){
               bingos = getBingo(bingo);
-              total = getTotal(total);
+              total = getTotal(totality);
             },
           ),
           const SizedBox(height: 20,),

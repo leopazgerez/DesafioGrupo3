@@ -6,11 +6,11 @@ import 'package:desafiogrupotres/src/models/bingo_ticket_model.dart';
 
 class Test extends StatelessWidget {
   Test({Key? key}) : super(key: key);
-
-  late var bingoTicketModel = BingoTicketModel(priceUnit: 2000);
+  late var bingoTicketModel = BingoTicketModel(priceUnit: 20000);
+  late int amount=0;
+  late int total=0;
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: Container(
         color: const Color(0xff35A4A3),
@@ -26,15 +26,18 @@ class Test extends StatelessWidget {
   }
 
   Widget _testComponent(context){
-    late int amount=0;
-    late int total=0;
 
-    int getAmount(int amountWidget){
+    /*int getAmount(int amountWidget){
       return amountWidget;
     }
 
     int getTotalPrice(int totalPriceWidget){
       return totalPriceWidget;
+    }*/
+
+    void amountAndTotalPrice(int amountBingos,int totalPrice){
+      total = totalPrice;
+      amount = amountBingos;
     }
 
     return Container(
@@ -53,10 +56,7 @@ class Test extends StatelessWidget {
             valueMax: 30,
             color: const Color(0xff35A4A3),
             label: 'Cantidad de cartones',
-            getShop: (int amountBingos,int totalPrice){
-              total = getTotalPrice(totalPrice);
-              amount = getAmount(amountBingos);
-            },
+            getShop: amountAndTotalPrice,
           ),
           const SizedBox(height: 20,),
           CustomButton(
@@ -73,3 +73,6 @@ class Test extends StatelessWidget {
     );
   }
 }
+
+
+

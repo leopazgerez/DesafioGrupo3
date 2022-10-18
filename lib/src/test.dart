@@ -59,7 +59,7 @@ class Test extends StatelessWidget {
             getShop: amountAndTotalPrice,
           ),
           const SizedBox(height: 20,),
-          CustomButton(
+          /*CustomButton(
             text: 'Comprar',
             backgroundColor: const Color(0xff35A4A3),
             height: 50,
@@ -67,7 +67,7 @@ class Test extends StatelessWidget {
             onTap: (){
               print("Cartones = " + amount.toString() + " Precio Total = " + total.toString() );
             },
-          ),
+          ),*/
         ],
       ),
     );

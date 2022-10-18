@@ -5,7 +5,7 @@ import '../../models/bingo_ticket_model.dart';
 class PriceCounter extends StatefulWidget {
   final String? label;
   final int valueMax;
-  final int valueMin;
+  final int valueMin=1;
   final BingoTicketModel bingoTicketModel;
   final Color color;
   late int amount = valueMin;
@@ -16,7 +16,6 @@ class PriceCounter extends StatefulWidget {
     required this.valueMax,
     this.color = Colors.blue,
     this.label,
-    this.valueMin = 1,
     required this.getShop,
     Key? key}) : super(key: key);
 
